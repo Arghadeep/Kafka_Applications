@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: credit-card-data-processor
+  namespace: credit-card-data-streaming-101-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: credit-card-data-processor
+  template:
+    metadata:
+      labels:
+        app: credit-card-data-processor
+      namespace: credit-card-data-streaming-101-ns
+    spec:
+      serviceAccountName: credit-card-data-streaming-svc
+      containers:
+        - name: credit-card-data-processor
+          image: asia-south1-docker.pkg.dev/data-streaming-101/data-streaming-components/credit-card-data-processor-v1.0.0
+          ports:
+            - containerPort: 8080

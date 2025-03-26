@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: credit-card-data-producer
+  namespace: credit-card-data-streaming-101-ns
+spec:
+  type: LoadBalancer
+  selector:
+    app: credit-card-data-producer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

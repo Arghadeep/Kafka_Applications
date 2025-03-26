@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: credit-card-data-producer
+  namespace: credit-card-data-streaming-101-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: credit-card-data-producer
+  template:
+    metadata:
+      labels:
+        app: credit-card-data-producer
+      namespace: credit-card-data-streaming-101-ns
+    spec:
+      serviceAccountName: credit-card-data-streaming-svc
+      containers:
+        - name: credit-card-data-producer
+          image: asia-south2-docker.pkg.dev/sapient-data-streaming-project/data-streaming-repository/credit-card-data-producer:v1
+          ports:
+            - containerPort: 8080
